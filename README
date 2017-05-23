@@ -3,8 +3,9 @@ Main class: fractal.code.vending.Bootstrap.java
 
 Program arguments:
 
-1. amount mandatory eg. 383
-2. coin inventory file path - optional eg. coin-inventory.properties
+1. amount - mandatory eg. 383
+2. coin inventory file path - optional, if not provided the default infinite inventory will be used (test case 1)
+                              eg. /home/user/vending/coin-inventory.properties
 
 
 VM arguments:
