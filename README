@@ -1,0 +1,12 @@
+Main class: fractal.code.vending.Bootstrap.java
+
+
+Program arguments:
+
+1. amount mandatory eg. 383
+2. coin inventory file path - optional eg. coin-inventory.properties
+
+
+VM arguments:
+
+-Xss50m (the algorithm used is recursive so the stack size should be expanded to avoid StackOverflowError)
