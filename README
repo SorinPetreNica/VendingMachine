@@ -3,7 +3,7 @@ Build: mvn clean install -U
 
 RUN
 
-Main class: fractal.code.vending.Bootstrap.java
+Main class: fractal.code.vending.Bootstrap
 
 Program arguments:
 
