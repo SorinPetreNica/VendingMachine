@@ -1,4 +1,6 @@
-Build: mvn clean install -U
+BUILD
+
+mvn clean install -U
 
 
 RUN
@@ -8,7 +10,7 @@ Main class: fractal.code.vending.Bootstrap
 Program arguments:
 
 1. amount - mandatory eg. 383
-2. coin inventory file path - optional, if not provided the default infinite inventory will be used (test case 1) eg. /home/user/vending/coin-inventory.properties
+2. coin inventory file path - optional eg. /home/user/vending/coin-inventory.properties
 
 If the 2nd argument is not provided then a default infinite supply of the following denominations will be used: (100, 50, 20, 10, 5, 2, 1)
 
