@@ -27,7 +27,7 @@ public class VendingMachine {
             throw new IllegalArgumentException("With the given inventory the maximum allowed amount is: " +
                     coinInventory.sum() + "p");
 
-        Change change = getOptimalChangeForRecursive(pence);
+        Change change = getChangeRecursive(pence);
         coinInventory.take(change);
 
         log.info(pence + "p changes into: " + change);
@@ -36,7 +36,11 @@ public class VendingMachine {
         return change.asCollection();
     }
 
-    public Change getOptimalChangeForRecursive(int pence) {
+    public Collection<Coin> getChangeFor(int pence) {
+        return getOptimalChangeFor(pence);
+    }
+
+    public Change getChangeRecursive(int pence) {
         Change change;
         if (cache.containsKey(pence)) return cache.get(pence);
         else {
@@ -50,11 +54,12 @@ public class VendingMachine {
                         else {
                             ch.add(coin, 1);
                             int difference = pence - coin.getDenomination();
-                            ch.add(getOptimalChangeForRecursive(difference));
+                            ch.add(getChangeRecursive(difference));
                         }
 
                         return ch;
                     })
+                    .filter(ch -> ch.sum() == pence)
                     .filter(coinInventory::canServe)
                     .sorted((change1, change2) -> change1.getNrOfCoins() - change2.getNrOfCoins())
                     .findFirst()

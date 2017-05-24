@@ -46,6 +46,10 @@ public class Change {
         return coins.entrySet().stream();
     }
 
+    public int sum() {
+        return coins.entrySet().stream().mapToInt(entry -> entry.getKey().getDenomination() * entry.getValue()).sum();
+    }
+
     @Override
     public String toString() {
         return stream()
@@ -54,5 +58,6 @@ public class Change {
                 .reduce((denom1, denom2) -> denom1 + " + " + denom2)
                 .orElse("0p");
     }
+
 
 }
