@@ -2,6 +2,7 @@ package fractal.code.vending.inventory;
 
 import fractal.code.vending.Coin;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -22,18 +23,17 @@ public class CoinInventoryFactory {
         else {
             CoinInventory coinInventory = new LimitedCoinInventory();
             Path inventoryPath = Paths.get(sourceFilePath);
-            try {
-                Files.newBufferedReader(inventoryPath)
-                        .lines()
+            try (BufferedReader reader = Files.newBufferedReader(inventoryPath)) {
+                reader.lines()
                         .map(pair -> pair.split("="))
                         .map(pair -> new int[]{Integer.parseInt(pair[0]), Integer.parseInt(pair[1])})
                         .forEach(supply -> coinInventory.addSupply(new Coin(supply[0]), supply[1]));
-
                 return coinInventory;
-            } catch (IOException | UncheckedIOException e) {
-                throw new IllegalArgumentException("Could not read input file: " + sourceFilePath, e);
-            } catch(NumberFormatException nfe) {
-                throw new IllegalArgumentException("Input file must have the following structure: (int)denomination=(int)supply", nfe);
+            } catch (IOException | UncheckedIOException ioe) {
+                throw new IllegalArgumentException("Could not read input file: " + sourceFilePath, ioe);
+            } catch (NumberFormatException nfe) {
+                throw new IllegalArgumentException("Input file must have the following structure:" +
+                        " (int)denomination=(int)supply", nfe);
             }
         }
     }
