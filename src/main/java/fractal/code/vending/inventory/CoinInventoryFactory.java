@@ -32,8 +32,10 @@ public class CoinInventoryFactory {
                         .forEach(supply -> coinInventory.addSupply(new Coin(supply[0]), supply[1]));
 
                 return coinInventory;
-            } catch (IOException | UncheckedIOException | NumberFormatException e) {
+            } catch (IOException | UncheckedIOException e) {
                 throw new IllegalArgumentException("Could not read input file: " + sourceFilePath, e);
+            } catch(NumberFormatException nfe) {
+                throw new IllegalArgumentException("Input file must have the following structure: (int)denomination=(int)supply", nfe);
             }
         }
     }
