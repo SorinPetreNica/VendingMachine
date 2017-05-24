@@ -10,6 +10,8 @@ Program arguments:
 1. amount - mandatory eg. 383
 2. coin inventory file path - optional, if not provided the default infinite inventory will be used (test case 1) eg. /home/user/vending/coin-inventory.properties
 
+If the 2nd argument is not provided than a default infinite supply of the following denominations will be used: (100, 50, 20, 10, 5, 2, 1)
+
 
 VM arguments:
 
