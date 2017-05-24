@@ -17,7 +17,31 @@ import static org.junit.Assert.assertTrue;
 public class TestVendingMachine {
 
     @Test
-    public void testVendingMachine() {
+    public void testLimitedInventoryMachine() {
+        CoinInventoryFactory factory = new CoinInventoryFactory();
+        CoinInventory limitedInventory = factory.loadInventory("src/main/resources/coin-inventory.properties");
+        VendingMachine limitedVendingMachine = new VendingMachine(limitedInventory);
+
+        int pence = 166;
+        Collection<Coin> change = limitedVendingMachine.getChangeFor(pence);
+
+        assertEquals(pence, change.stream().mapToInt(Coin::getDenomination).sum());
+    }
+
+    @Test
+    public void testInfiniteInventoryMachine() {
+        CoinInventoryFactory factory = new CoinInventoryFactory();
+        CoinInventory infiniteInventory = factory.loadInventory();
+        VendingMachine vendingMachine = new VendingMachine(infiniteInventory);
+
+        int pence = 172;
+        Collection<Coin> change = vendingMachine.getOptimalChangeFor(pence);
+
+        assertEquals(pence, change.stream().mapToInt(Coin::getDenomination).sum());
+    }
+
+    @Test
+    public void comparisonTest() {
         CoinInventoryFactory factory = new CoinInventoryFactory();
         CoinInventory infiniteInventory = factory.loadInventory();
         VendingMachine vendingMachine = new VendingMachine(infiniteInventory);

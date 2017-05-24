@@ -18,8 +18,6 @@ public class CoinInventoryFactory {
     }
 
     public CoinInventory loadInventory(String sourceFilePath) {
-        System.out.println(Paths.get("").toAbsolutePath());
-
         if (sourceFilePath == null) return getDefaultCoinInventory();
         else {
             CoinInventory coinInventory = new LimitedCoinInventory();
