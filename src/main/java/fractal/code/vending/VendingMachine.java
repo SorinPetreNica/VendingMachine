@@ -40,7 +40,7 @@ public class VendingMachine {
         return getOptimalChangeFor(pence);
     }
 
-    public Change getChangeRecursive(int pence) {
+    private Change getChangeRecursive(int pence) {
         Change change;
         if (cache.containsKey(pence)) return cache.get(pence);
         else {
